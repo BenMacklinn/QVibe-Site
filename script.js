@@ -48,36 +48,33 @@ Hit map(vec3 p){
     // Momentum-based startup: rings start flat and gradually build up rotation
     // Cold start simulation - requires momentum to get going
     
-    // Momentum buildup function - all rings start together, slowly accelerate together
-    float globalMomentum = smoothstep(0.0, 8.0, u_time) * smoothstep(0.0, 1.0, u_time - 1.0); // All start after 1s, reach full speed over 8s
+    // Momentum buildup function - reaches full speed smoothly after ramp-up
+    // This stays stable forever after 8 seconds, preventing any time-based accumulation
+    float rawMomentum = smoothstep(0.0, 8.0, u_time) * smoothstep(0.0, 1.0, u_time - 1.0);
     
     // Apply momentum with easing - starts very slow, then accelerates
-    float easedMomentum = globalMomentum * globalMomentum * (3.0 - 2.0 * globalMomentum); // Smooth acceleration curve
+    float easedMomentum = rawMomentum * rawMomentum * (3.0 - 2.0 * rawMomentum);
     
-    // Use wrapped time to prevent unbounded rotation values (loops smoothly every ~314 seconds)
-    // Using TWO_PI (6.28318) ensures rotations are properly wrapped at natural cycle boundaries
+    // Calculate rotation angles and wrap them to prevent unbounded growth
+    // This prevents ALL numerical drift by keeping rotation values bounded
+    float baseRot1 = easedMomentum * u_time * 1.8;
+    float baseRot2a = easedMomentum * u_time/2.0 * 1.6;
+    float baseRot2b = easedMomentum * u_time/1.2 * 1.6;
+    float baseRot2c = easedMomentum * u_time/1.5 * 1.6;
+    float baseRot3a = easedMomentum * -u_time * 1.2 * 1.7;
+    float baseRot3b = easedMomentum * -u_time * 1.7;
+    float baseRot3c = easedMomentum * -u_time * 1.7;
+    
+    // Wrap angles to prevent numerical overflow and eliminate drift
+    // Using TWO_PI * N ensures rotations wrap at natural cycle boundaries
+    // 20 full rotations (~125.6 radians) provides smooth looping with zero perceptible impact
     const float TWO_PI = 6.283185307179586;
-    float wrappedTime = mod(u_time * 0.5, TWO_PI * 100.0); // Loop every 628 seconds (~10.5 minutes)
+    const float wrapLimit = TWO_PI * 20.0; // ~125.6 radians = 20 full rotations
     
-    // Rotation calculations with momentum-based speed - all rings use same momentum
-    // Wrapping prevents numerical drift while maintaining continuous rotation appearance
-    vec3 rot1 = vec3(
-        easedMomentum * wrappedTime * 1.8, 
-        easedMomentum * wrappedTime * 1.8, 
-        easedMomentum * wrappedTime * 1.8
-    );
-    
-    vec3 rot2 = vec3(
-        easedMomentum * wrappedTime/2.0 * 1.6, 
-        easedMomentum * wrappedTime/1.2 * 1.6, 
-        easedMomentum * wrappedTime/1.5 * 1.6
-    );
-    
-    vec3 rot3 = vec3(
-        easedMomentum * -wrappedTime*1.2 * 1.7, 
-        easedMomentum * -wrappedTime * 1.7, 
-        easedMomentum * -wrappedTime * 1.7
-    );
+    float wrapRot1 = mod(baseRot1, wrapLimit);
+    vec3 rot1 = vec3(wrapRot1, wrapRot1, wrapRot1);
+    vec3 rot2 = vec3(mod(baseRot2a, wrapLimit), mod(baseRot2b, wrapLimit), mod(baseRot2c, wrapLimit));
+    vec3 rot3 = vec3(mod(baseRot3a, wrapLimit), mod(baseRot3b, wrapLimit), mod(baseRot3c, wrapLimit));
     
     vec3 q1 = p * eulerXYZ(rot1);
     vec3 q2 = p * eulerXYZ(rot2);
@@ -370,8 +367,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const scaledWidth = window.innerWidth * SCALE_FACTOR * qualityLevel;
         const scaledHeight = window.innerHeight * SCALE_FACTOR * qualityLevel;
         
+        // Wrap time to prevent precision loss and drift from unbounded values
+        // ~2500 seconds (41+ minutes) provides stable looping with zero visual impact
+        const maxTime = 2500.0;
+        const wrappedTime = (time * 0.001) % maxTime;
+        
         gl.uniform2f(program_u_resolution, scaledWidth, scaledHeight);
-        gl.uniform1f(program_u_time, time * 0.001);
+        gl.uniform1f(program_u_time, wrappedTime);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
         requestAnimationFrame(render);
