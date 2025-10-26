@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QVibe - Queen's Applied AI</title>
+    <link rel="icon" type="image/png" href="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Glassmorphism Navigation Bar -->
+    <nav class="glass-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png" alt="QVibe Logo" class="logo-image">
+                <a href="index.html" style="text-decoration: none; color: #FFFFFF;"><h2>QVibe</h2></a>
+            </div>
+            <div class="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="team.html">Team</a>
+                <div class="dropdown">
+                    <button class="nav-button">Join Us</button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-link">Exec Team Sign Up</a>
+                        <a href="#" class="dropdown-link">Hackathon Interest Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="webgl-canvas"></canvas>
+            <div class="background-overlay"></div>
+        </div>
+        
+        <!-- Glassmorphism Content Boxes -->
+        <div class="content-container">
+            <div class="hero-text">
+                <h1>AI Builder Community</h1>
+                <p>Anyone can build.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Frosted Black Box -->
+    <div id="frosted-box" class="frosted-box">
+        <div class="frosted-content">
+            <div class="team-header">
+                <h3>About Us</h3>
+                <div class="team-intro">
+                    <p>QVibe empowers anyone to build with AI tools, regardless of technical background. We host hands-on workshops, annual hackathons, and collaborative project building sessions.</p>
+                </div>
+            </div>
+            
+            <div class="team-features">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">01</span>
+                        <h4>Workshops</h4>
+                    </div>
+                    <div class="feature-image workshops-image">
+                        <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="workshopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8A2BE2;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#9400D3;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00BFFF;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="150" fill="url(#workshopGradient)"/>
+                            <!-- Monitor -->
+                            <rect x="50" y="30" width="120" height="75" rx="5" fill="rgba(255,255,255,0.15)"/>
+                            <rect x="60" y="40" width="100" height="55" rx="3" fill="#000"/>
+                            <!-- Keyboard -->
+                            <rect x="80" y="100" width="60" height="15" rx="2" fill="rgba(255,255,255,0.2)"/>
+                            <!-- Brain/AI Symbol -->
+                            <circle cx="280" cy="65" r="35" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                            <path d="M275 60 Q268 55 265 60 Q262 65 268 68 Q274 71 280 68 Q286 65 295 70 Q290 60 285 58 Q282 55 275 60" fill="rgba(255,255,255,0.3)"/>
+                            <!-- Code Brackets -->
+                            <text x="300" y="100" font-family="monospace" font-size="30" fill="rgba(255,255,255,0.6)" font-weight="bold">&lt;/&gt;</text>
+                        </svg>
+                    </div>
+                    <p>Learn AI tools in our workshops and build your own projects.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">02</span>
+                        <h4>Hackathon</h4>
+                    </div>
+                    <div class="feature-image hackathon-image">
+                        <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="hackathonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#1E90FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8A2BE2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="150" fill="url(#hackathonGradient)"/>
+                            <!-- Trophy -->
+                            <rect x="180" y="20" width="40" height="30" rx="5" fill="rgba(255,255,255,0.3)"/>
+                            <circle cx="200" cy="25" r="8" fill="rgba(255,255,255,0.5)"/>
+                            <rect x="195" y="50" width="10" height="30" fill="rgba(255,255,255,0.3)"/>
+                            <rect x="170" y="80" width="60" height="10" rx="5" fill="rgba(255,255,255,0.3)"/>
+                            <!-- Lightning bolts (energy/competition) -->
+                            <path d="M100 80 L85 110 L95 110 L80 140 L105 100 L95 100 Z" fill="rgba(255,255,255,0.4)"/>
+                            <path d="M300 80 L285 110 L295 110 L280 140 L305 100 L295 100 Z" fill="rgba(255,255,255,0.4)"/>
+                            <!-- Code/Sparkles -->
+                            <circle cx="130" cy="60" r="3" fill="rgba(255,255,255,0.6)"/>
+                            <circle cx="250" cy="70" r="4" fill="rgba(255,255,255,0.5)"/>
+                            <circle cx="320" cy="55" r="2" fill="rgba(255,255,255,0.7)"/>
+                        </svg>
+                    </div>
+                    <p>Our annual hackathon is a chance to build your own project using AI tools and compete with other builders.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">03</span>
+                        <h4>Project Showcase</h4>
+                    </div>
+                    <div class="feature-image showcase-image">
+                        <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="showcaseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#9400D3;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#8A2BE2;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4B0082;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="150" fill="url(#showcaseGradient)"/>
+                            <!-- Display/Monitor -->
+                            <rect x="50" y="20" width="80" height="50" rx="3" fill="rgba(255,255,255,0.15)"/>
+                            <rect x="55" y="25" width="70" height="40" rx="2" fill="#000"/>
+                            <rect x="60" y="30" width="60" height="30" rx="1" fill="rgba(138,43,226,0.5)"/>
+                            <!-- Speech bubble -->
+                            <ellipse cx="220" cy="50" rx="40" ry="30" fill="rgba(255,255,255,0.2)"/>
+                            <path d="M200 70 L190 85 L205 75 Z" fill="rgba(255,255,255,0.2)"/>
+                            <!-- Share/Upload arrows -->
+                            <circle cx="320" cy="65" r="25" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                            <path d="M315 55 L320 50 L325 55 M320 50 L320 75 M310 70 L320 75 L330 70" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <!-- Stars/Sparkles -->
+                            <polygon points="140,40 142,45 147,45 143,48 145,53 140,50 135,53 137,48 133,45 138,45" fill="rgba(255,255,255,0.6)"/>
+                            <polygon points="280,100 281,103 284,103 281,105 282,108 280,106 278,108 279,105 276,103 279,103" fill="rgba(255,255,255,0.5)"/>
+                            <polygon points="350,25 351,27 353,27 351,29 352,31 350,29 348,31 349,29 347,27 349,27" fill="rgba(255,255,255,0.7)"/>
+                        </svg>
+                    </div>
+                    <p>Build something amazing and share it with the community with the help of our mentors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Card -->
+    <div id="projects-box" class="frosted-box">
+        <div class="frosted-content">
+            <div class="team-header">
+                <h3>Our Projects</h3>
+                <div class="team-intro">
+                    <p>QVibe is Queen's University's AI innovation club, teaching students from any faculty how to build real products and startups using today's frontier AI tools. No coding required, just curiosity and creativity.</p>
+                    <button class="team-button" onclick="window.location.href='projects.html'">View All Projects</button>
+                </div>
+            </div>
+            
+            <div class="team-features">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">01</span>
+                        <h4>CaseAI</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="CaseAI.png" alt="CaseAI - AI legal case management">
+                    </div>
+                    <p>Practice case studies for consulting interviews using AI-powered simulations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">02</span>
+                        <h4>Smart Money Confluence</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="SmartMoney.png" alt="SmartMoney - AI finance management tool">
+                    </div>
+                    <p>AI-powered trading tool built using Cursor to help make money trading stocks.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">03</span>
+                        <h4>Recover</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="Recover.png" alt="Recover - AI-powered injury recovery tool">
+                    </div>
+                    <p>iOS app tracking injury recovery progress with personalized exercise recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Team Card -->
+    <div id="team-box" class="frosted-box">
+        <div class="frosted-content">
+            <div class="team-header">
+                <h3>Our Team</h3>
+                <div class="team-intro">
+                    <p>The QVibe leadership team bringing AI innovation to Queen's University.</p>
+                    <button class="team-button" onclick="window.location.href='team.html'">Meet the Team</button>
+                </div>
+            </div>
+            
+            <div class="team-features">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">01</span>
+                        <h4>Ben Macklin</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="Ben Macklin.png" alt="Ben Macklin - Founder">
+                    </div>
+                    <p>Founder</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">02</span>
+                        <h4>Ben Lewandowski</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="Ben Lewandowski.png" alt="Ben Lewandowski - Director of Operations">
+                    </div>
+                    <p>Director of Operations</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <span class="feature-number">03</span>
+                        <h4>Greg Brenner</h4>
+                    </div>
+                    <div class="feature-image">
+                        <img src="Greg Brenner.png" alt="Greg Brenner - Head of iOS Development">
+                    </div>
+                    <p>Head of iOS Development</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DE/HELPERS Final State -->
+    <div id="final-text-box">
+        <div class="final-text-container">
+            <!-- Hero Text -->
+            <div class="hero-text">
+                <p> Ready to build the future with AI? Join QVibe and connect with passionate builders, developers, and innovators. Together, we create amazing AI solutions, share knowledge, and push the boundaries of what's possible with today's AI tools.</p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-brackets">
+                        <div class="bracket top-left"></div>
+                        <div class="bracket top-right"></div>
+                        <div class="bracket bottom-left"></div>
+                        <div class="bracket bottom-right"></div>
+                    </div>
+                    <div class="stat-number">20+</div>
+                    <div class="stat-description">Members building with AI</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-brackets">
+                        <div class="bracket top-left"></div>
+                        <div class="bracket top-right"></div>
+                        <div class="bracket bottom-left"></div>
+                        <div class="bracket bottom-right"></div>
+                    </div>
+                    <div class="stat-number">10+</div>
+                    <div class="stat-description">Workshops hosted</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-brackets">
+                        <div class="bracket top-left"></div>
+                        <div class="bracket top-right"></div>
+                        <div class="bracket bottom-left"></div>
+                        <div class="bracket bottom-right"></div>
+                    </div>
+                    <div class="stat-number">42</div>
+                    <div class="stat-description">Hackathon participants</div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <div class="scroll-indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
