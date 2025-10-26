@@ -48,33 +48,33 @@ Hit map(vec3 p){
     // Momentum-based startup: rings start flat and gradually build up rotation
     // Cold start simulation - requires momentum to get going
     
-    // Momentum buildup function - reaches full speed smoothly after ramp-up
-    // This stays stable forever after 8 seconds, preventing any time-based accumulation
-    float rawMomentum = smoothstep(0.0, 8.0, u_time) * smoothstep(0.0, 1.0, u_time - 1.0);
-    
-    // Apply momentum with easing - starts very slow, then accelerates
+    // Momentum buildup - reaches 1.0 after 8 seconds, stays stable
+    // Since time wraps at 3141s, momentum is 1.0 for 99.7% of the cycle
+    float rampDur = min(8.0, u_time);
+    float rawMomentum = smoothstep(0.0, 8.0, rampDur) * smoothstep(0.0, 1.0, max(0.0, rampDur - 1.0));
     float easedMomentum = rawMomentum * rawMomentum * (3.0 - 2.0 * rawMomentum);
     
-    // Calculate rotation angles and wrap them to prevent unbounded growth
-    // This prevents ALL numerical drift by keeping rotation values bounded
-    float baseRot1 = easedMomentum * u_time * 1.8;
-    float baseRot2a = easedMomentum * u_time/2.0 * 1.6;
-    float baseRot2b = easedMomentum * u_time/1.2 * 1.6;
-    float baseRot2c = easedMomentum * u_time/1.5 * 1.6;
-    float baseRot3a = easedMomentum * -u_time * 1.2 * 1.7;
-    float baseRot3b = easedMomentum * -u_time * 1.7;
-    float baseRot3c = easedMomentum * -u_time * 1.7;
+    // Ensure momentum is 1.0 for most of the wrapped cycle to prevent resets
+    easedMomentum = mix(easedMomentum, 1.0, smoothstep(6.0, 10.0, u_time));
     
-    // Wrap angles to prevent numerical overflow and eliminate drift
-    // Using TWO_PI * N ensures rotations wrap at natural cycle boundaries
-    // 20 full rotations (~125.6 radians) provides smooth looping with zero perceptible impact
-    const float TWO_PI = 6.283185307179586;
-    const float wrapLimit = TWO_PI * 20.0; // ~125.6 radians = 20 full rotations
+    // Use wrapped time (from JavaScript) for all rotations to prevent unbounded accumulation
+    vec3 rot1 = vec3(
+        easedMomentum * u_time * 1.8, 
+        easedMomentum * u_time * 1.8, 
+        easedMomentum * u_time * 1.8
+    );
     
-    float wrapRot1 = mod(baseRot1, wrapLimit);
-    vec3 rot1 = vec3(wrapRot1, wrapRot1, wrapRot1);
-    vec3 rot2 = vec3(mod(baseRot2a, wrapLimit), mod(baseRot2b, wrapLimit), mod(baseRot2c, wrapLimit));
-    vec3 rot3 = vec3(mod(baseRot3a, wrapLimit), mod(baseRot3b, wrapLimit), mod(baseRot3c, wrapLimit));
+    vec3 rot2 = vec3(
+        easedMomentum * u_time/2.0 * 1.6, 
+        easedMomentum * u_time/1.2 * 1.6, 
+        easedMomentum * u_time/1.5 * 1.6
+    );
+    
+    vec3 rot3 = vec3(
+        easedMomentum * -u_time*1.2 * 1.7, 
+        easedMomentum * -u_time * 1.7, 
+        easedMomentum * -u_time * 1.7
+    );
     
     vec3 q1 = p * eulerXYZ(rot1);
     vec3 q2 = p * eulerXYZ(rot2);
@@ -368,8 +368,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const scaledHeight = window.innerHeight * SCALE_FACTOR * qualityLevel;
         
         // Wrap time to prevent precision loss and drift from unbounded values
-        // ~2500 seconds (41+ minutes) provides stable looping with zero visual impact
-        const maxTime = 2500.0;
+        // Must match the timeWrap constant in the shader (3141.59 seconds)
+        const maxTime = 3141.59; // ~52 minutes - matches shader
         const wrappedTime = (time * 0.001) % maxTime;
         
         gl.uniform2f(program_u_resolution, scaledWidth, scaledHeight);
