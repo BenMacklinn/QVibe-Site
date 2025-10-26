@@ -54,23 +54,29 @@ Hit map(vec3 p){
     // Apply momentum with easing - starts very slow, then accelerates
     float easedMomentum = globalMomentum * globalMomentum * (3.0 - 2.0 * globalMomentum); // Smooth acceleration curve
     
+    // Use wrapped time to prevent unbounded rotation values (loops smoothly every ~314 seconds)
+    // Using TWO_PI (6.28318) ensures rotations are properly wrapped at natural cycle boundaries
+    const float TWO_PI = 6.283185307179586;
+    float wrappedTime = mod(u_time * 0.5, TWO_PI * 100.0); // Loop every 628 seconds (~10.5 minutes)
+    
     // Rotation calculations with momentum-based speed - all rings use same momentum
+    // Wrapping prevents numerical drift while maintaining continuous rotation appearance
     vec3 rot1 = vec3(
-        easedMomentum * u_time * 1.8, 
-        easedMomentum * u_time * 1.8, 
-        easedMomentum * u_time * 1.8
+        easedMomentum * wrappedTime * 1.8, 
+        easedMomentum * wrappedTime * 1.8, 
+        easedMomentum * wrappedTime * 1.8
     );
     
     vec3 rot2 = vec3(
-        easedMomentum * u_time/2.0 * 1.6, 
-        easedMomentum * u_time/1.2 * 1.6, 
-        easedMomentum * u_time/1.5 * 1.6
+        easedMomentum * wrappedTime/2.0 * 1.6, 
+        easedMomentum * wrappedTime/1.2 * 1.6, 
+        easedMomentum * wrappedTime/1.5 * 1.6
     );
     
     vec3 rot3 = vec3(
-        easedMomentum * -u_time*1.2 * 1.7, 
-        easedMomentum * -u_time * 1.7, 
-        easedMomentum * -u_time * 1.7
+        easedMomentum * -wrappedTime*1.2 * 1.7, 
+        easedMomentum * -wrappedTime * 1.7, 
+        easedMomentum * -wrappedTime * 1.7
     );
     
     vec3 q1 = p * eulerXYZ(rot1);
