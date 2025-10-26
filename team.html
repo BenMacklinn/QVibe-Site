@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - QVibe</title>
+    <link rel="icon" type="image/png" href="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-y: auto;
+            height: auto;
+            min-height: 100vh;
+            background: transparent;
+        }
+        
+        nav {
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .team-container {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .page-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-items: center;
+        }
+        
+        @media (max-width: 968px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .team-card-full {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            text-align: center;
+            max-width: 350px;
+        }
+        
+        .team-card-full:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .team-image-circular {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin-bottom: 1.5rem;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .team-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-background" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: -2;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: 
+            radial-gradient(circle at 30% 30%, rgba(138,43,226,0.4) 0%, transparent 40%),
+            radial-gradient(circle at 70% 70%, rgba(0,191,255,0.3) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(138,43,226,0.2) 0%, rgba(0,191,255,0.15) 50%, rgba(25,25,112,0.3) 100%);
+        "></div>
+    </div>
+
+    <!-- Glassmorphism Navigation Bar -->
+    <nav class="glass-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png" alt="QVibe Logo" class="logo-image">
+                <a href="index.html" style="text-decoration: none; color: #FFFFFF;"><h2>QVibe</h2></a>
+            </div>
+            <div class="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="team.html">Team</a>
+                <div class="dropdown">
+                    <button class="nav-button">Join Us</button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-link">Exec Team Sign Up</a>
+                        <a href="#" class="dropdown-link">Hackathon Interest Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="team-container" style="position: relative; z-index: 10;">
+        <h1 class="page-title">Our Team</h1>
+        <p class="page-subtitle">The QVibe leadership team bringing AI innovation to Queen's University</p>
+        
+        <div class="team-grid">
+            <div class="team-card-full">
+                <img src="Ben Macklin.png" alt="Ben Macklin" class="team-image-circular">
+                <h3 class="team-name">Ben Macklin</h3>
+                <p class="team-role">Founder</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Ben Lewandowski.png" alt="Ben Lewandowski" class="team-image-circular">
+                <h3 class="team-name">Ben Lewandowski</h3>
+                <p class="team-role">Director of Operations</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Greg Brenner.png" alt="Greg Brenner" class="team-image-circular">
+                <h3 class="team-name">Greg Brenner</h3>
+                <p class="team-role">Head of iOS Development</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Ray Goldberg.png" alt="Ray Goldberg" class="team-image-circular">
+                <h3 class="team-name">Ray Goldberg</h3>
+                <p class="team-role">Lead Project Manager</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Max Rainville.png" alt="Max Rainville" class="team-image-circular">
+                <h3 class="team-name">Max Rainville</h3>
+                <p class="team-role">Head of Culture</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Brodie Gilles.png" alt="Brodie Gilles" class="team-image-circular">
+                <h3 class="team-name">Brodie Gilles</h3>
+                <p class="team-role">Automations Lead</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Daniel Ifergan.png" alt="Daniel Ifergan" class="team-image-circular">
+                <h3 class="team-name">Daniel Ifergan</h3>
+                <p class="team-role">Development Director</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Jacob Shull.png" alt="Jacob Shull" class="team-image-circular">
+                <h3 class="team-name">Jacob Shull</h3>
+                <p class="team-role">Marketing Director</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Matthew Bowman.png" alt="Matthew Bowman" class="team-image-circular">
+                <h3 class="team-name">Matthew Bowman</h3>
+                <p class="team-role">Marketing Director</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Tanry Wang.png" alt="Tanry Wang" class="team-image-circular">
+                <h3 class="team-name">Tanry Wang</h3>
+                <p class="team-role">Logistics Director</p>
+            </div>
+            
+            <div class="team-card-full">
+                <img src="Juian Chan.png" alt="Julian Chan" class="team-image-circular">
+                <h3 class="team-name">Julian Chan</h3>
+                <p class="team-role">Logistics Director</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - QVibe</title>
+    <link rel="icon" type="image/png" href="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-y: auto;
+            height: auto;
+            min-height: 100vh;
+            background: transparent;
+        }
+        
+        nav {
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .projects-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .page-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card-full {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .project-card-full:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .project-image-full {
+            width: 100%;
+            height: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-background" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: -2;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: 
+            radial-gradient(circle at 30% 30%, rgba(138,43,226,0.4) 0%, transparent 40%),
+            radial-gradient(circle at 70% 70%, rgba(0,191,255,0.3) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(138,43,226,0.2) 0%, rgba(0,191,255,0.15) 50%, rgba(25,25,112,0.3) 100%);
+        "></div>
+    </div>
+
+    <!-- Glassmorphism Navigation Bar -->
+    <nav class="glass-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="ChatGPT Image Oct 8, 2025, 06_27_25 PM.png" alt="QVibe Logo" class="logo-image">
+                <a href="index.html" style="text-decoration: none; color: #FFFFFF;"><h2>QVibe</h2></a>
+            </div>
+            <div class="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="team.html">Team</a>
+                <div class="dropdown">
+                    <button class="nav-button">Join Us</button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-link">Exec Team Sign Up</a>
+                        <a href="#" class="dropdown-link">Hackathon Interest Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="projects-container" style="position: relative; z-index: 10;">
+        <h1 class="page-title">Our Projects</h1>
+        <p class="page-subtitle">Real projects built by QVibe members using AI tools</p>
+        
+        <div class="projects-grid">
+            <div class="project-card-full">
+                <img src="CaseAI.png" alt="CaseAI" class="project-image-full">
+                <h3 class="project-title">CaseAI</h3>
+                <p class="project-description">Built by Ben Macklin (Engineering) and Ben Lewandowski (Commerce), using AI to create a tool that helps students practice case studies for consulting interviews.</p>
+            </div>
+            
+            <div class="project-card-full">
+                <img src="SmartMoney.png" alt="SmartMoney" class="project-image-full">
+                <h3 class="project-title">Smart Money Confluence</h3>
+                <p class="project-description">Built by Max Rainville (Commerce), he used AI tools like Cursor to create a working tool that helped him make money trading stocks.</p>
+            </div>
+            
+            <div class="project-card-full">
+                <img src="Recover.png" alt="Recover" class="project-image-full">
+                <h3 class="project-title">Recover</h3>
+                <p class="project-description">Built by Greg Brenner (Kinesiology), Greg created an iOS app that helps users recover from injuries by tracking their progress and providing personalized exercises.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
