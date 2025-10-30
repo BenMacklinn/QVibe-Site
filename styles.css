@@ -1728,11 +1728,13 @@ body.state-final .hero {
 }
 
 /* Hide frosted boxes in final state to prevent box effect */
-body.state-final .frosted-box,
+/* Allow slide-out animations to complete in final state.
+   We no longer hard-hide frosted boxes immediately. */
+/* body.state-final .frosted-box,
 body.state-final #projects-box,
 body.state-final #team-box {
     display: none;
-}
+} */
 
 /* Light bleed effects for all states - universal atmospheric lighting */
 .background-overlay::after {

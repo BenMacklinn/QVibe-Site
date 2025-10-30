@@ -274,6 +274,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const canvas = document.getElementById('webgl-canvas');
     console.log('Canvas found:', canvas);
+    if (!canvas) {
+        // Not on a page with WebGL hero (e.g., team.html). Skip WebGL setup.
+        return;
+    }
     
     // Performance monitoring
     let fps = 0;
@@ -283,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const gl = canvas.getContext('webgl');
+    let gl = canvas.getContext('webgl');
     
     if (!gl) {
         console.error('WebGL not supported, trying webgl2');
@@ -397,6 +401,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const frostedBox = document.getElementById('frosted-box');
     const projectsBox = document.getElementById('projects-box');
     const teamBox = document.getElementById('team-box');
+    if (!frostedBox || !projectsBox || !teamBox) {
+        // Not on the homepage; skip scroll/state machine logic
+        return;
+    }
     let isBoxVisible = false; // Start with card hidden
     let wheelTimeout;
     let currentState = STATES.PREVIEW; // Track current state - start in preview
@@ -519,9 +527,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 onStateChange(currentState, previousState);
                 
             } else if (deltaY > 0 && currentState === STATES.TEAM) {
-                // Prevent scrolling to final state - stay on team page
-                console.log('Final page disabled - staying on team');
-                // Don't change state
+                // Scrolling down from team - go to final state
+                console.log('Transitioning to final page');
+                
+                // Team card slides up and out to reveal final
+                teamBox.classList.remove('team');
+                // Force reflow to ensure transition starts cleanly
+                // eslint-disable-next-line no-unused-expressions
+                teamBox.offsetHeight;
+                teamBox.classList.add('slide-up');
+                // After the animation, hide the team box to avoid overlay issues
+                setTimeout(() => {
+                    teamBox.style.display = 'none';
+                }, 700);
+                
+                currentState = STATES.FINAL;
+                onStateChange(currentState, previousState);
                 
             } else if (deltaY < 0 && currentState === STATES.TEAM) {
                 // Scrolling up from team - go back to projects
@@ -536,6 +557,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 projectsBox.classList.add('projects');
                 
                 currentState = STATES.PROJECTS;
+                onStateChange(currentState, previousState);
+                
+            } else if (deltaY < 0 && currentState === STATES.FINAL) {
+                // Scrolling up from final - return to team
+                console.log('Returning to team from final');
+                
+                // Bring team card back into view with slide-down animation
+                teamBox.style.display = 'flex';
+                teamBox.classList.remove('team');
+                teamBox.classList.add('slide-up'); // position above viewport
+                // Force reflow to ensure transition timing is respected
+                // eslint-disable-next-line no-unused-expressions
+                teamBox.offsetHeight;
+                teamBox.classList.remove('slide-up');
+                teamBox.classList.add('team');
+                
+                currentState = STATES.TEAM;
                 onStateChange(currentState, previousState);
                 
             } else if (deltaY < 0 && currentState === STATES.PROJECTS) {
