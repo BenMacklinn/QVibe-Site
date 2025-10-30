@@ -48,13 +48,16 @@ Hit map(vec3 p){
     // Momentum-based startup: rings start flat and gradually build up rotation
     // Cold start simulation - requires momentum to get going
     
-    // Momentum buildup function - all rings start together, slowly accelerate together
-    float globalMomentum = smoothstep(0.0, 8.0, u_time) * smoothstep(0.0, 1.0, u_time - 1.0); // All start after 1s, reach full speed over 8s
+    // Momentum buildup - reaches 1.0 after 8 seconds, stays stable
+    // Since time wraps at 3141s, momentum is 1.0 for 99.7% of the cycle
+    float rampDur = min(8.0, u_time);
+    float rawMomentum = smoothstep(0.0, 8.0, rampDur) * smoothstep(0.0, 1.0, max(0.0, rampDur - 1.0));
+    float easedMomentum = rawMomentum * rawMomentum * (3.0 - 2.0 * rawMomentum);
     
-    // Apply momentum with easing - starts very slow, then accelerates
-    float easedMomentum = globalMomentum * globalMomentum * (3.0 - 2.0 * globalMomentum); // Smooth acceleration curve
+    // Ensure momentum is 1.0 for most of the wrapped cycle to prevent resets
+    easedMomentum = mix(easedMomentum, 1.0, smoothstep(6.0, 10.0, u_time));
     
-    // Rotation calculations with momentum-based speed - all rings use same momentum
+    // Use wrapped time (from JavaScript) for all rotations to prevent unbounded accumulation
     vec3 rot1 = vec3(
         easedMomentum * u_time * 1.8, 
         easedMomentum * u_time * 1.8, 
@@ -364,8 +367,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const scaledWidth = window.innerWidth * SCALE_FACTOR * qualityLevel;
         const scaledHeight = window.innerHeight * SCALE_FACTOR * qualityLevel;
         
+        // Wrap time to prevent precision loss and drift from unbounded values
+        // Must match the timeWrap constant in the shader (3141.59 seconds)
+        const maxTime = 3141.59; // ~52 minutes - matches shader
+        const wrappedTime = (time * 0.001) % maxTime;
+        
         gl.uniform2f(program_u_resolution, scaledWidth, scaledHeight);
-        gl.uniform1f(program_u_time, time * 0.001);
+        gl.uniform1f(program_u_time, wrappedTime);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
         requestAnimationFrame(render);
@@ -511,26 +519,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 onStateChange(currentState, previousState);
                 
             } else if (deltaY > 0 && currentState === STATES.TEAM) {
-                // Scrolling down from team - go to final blank state
-                console.log('Going to final state');
-                
-                // Team card slides up and out of view
-                teamBox.classList.remove('team');
-                teamBox.classList.add('slide-up');
-                
-                currentState = STATES.FINAL;
-                onStateChange(currentState, previousState);
-                
-            } else if (deltaY < 0 && currentState === STATES.FINAL) {
-                // Scrolling up from final - go back to team
-                console.log('Going back to team');
-                
-                // Team card slides down from above
-                teamBox.classList.remove('slide-up');
-                teamBox.classList.add('team');
-                
-                currentState = STATES.TEAM;
-                onStateChange(currentState, previousState);
+                // Prevent scrolling to final state - stay on team page
+                console.log('Final page disabled - staying on team');
+                // Don't change state
                 
             } else if (deltaY < 0 && currentState === STATES.TEAM) {
                 // Scrolling up from team - go back to projects
