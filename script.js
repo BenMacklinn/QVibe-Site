@@ -398,6 +398,12 @@ const STATES = {
 
 // Frosted Box Wheel Detection with State Tracking
 document.addEventListener('DOMContentLoaded', function() {
+    const mobileViewport = window.matchMedia('(max-width: 768px)');
+    if (mobileViewport.matches) {
+        document.body.classList.add('state-mobile');
+        return;
+    }
+    
     const frostedBox = document.getElementById('frosted-box');
     const projectsBox = document.getElementById('projects-box');
     const teamBox = document.getElementById('team-box');
@@ -677,6 +683,40 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial state setup
     onStateChange(currentState, null);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileViewport = window.matchMedia('(max-width: 768px)');
+    if (!mobileViewport.matches) {
+        return;
+    }
+    
+    const modal = document.getElementById('mobile-disclaimer-modal');
+    if (!modal) {
+        return;
+    }
+    
+    const closeButton = modal.querySelector('.mobile-disclaimer-close');
+    const showModal = () => {
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+    };
+    const hideModal = () => {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+    };
+    
+    setTimeout(showModal, 100);
+    
+    if (closeButton) {
+        closeButton.addEventListener('click', hideModal);
+    }
+    
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            hideModal();
+        }
+    });
 });
 
 // Dropdown functionality
